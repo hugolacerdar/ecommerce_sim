@@ -1,4 +1,5 @@
 defmodule EcommerceSim.Producer do
+  alias EcommerceSim.Serializer
   alias KafkaEx.Protocol.Produce.Message
   alias KafkaEx.Protocol.Produce.Request
 
@@ -15,5 +16,9 @@ defmodule EcommerceSim.Producer do
     |> KafkaEx.produce()
   end
 
-  defp generate_message(%{value: value, key: key}), do: %Message{value: value, key: key}
+  defp generate_message(%{value: value, key: key}) do
+    encoded_value = Serializer.encode(value)
+
+    %Message{value: encoded_value, key: key}
+  end
 end

@@ -2,6 +2,7 @@ defmodule EcommerceSim.FraudDetectorService.ConsumerOne do
   use Broadway
 
   alias Broadway.Message
+  alias EcommerceSim.Serializer
 
   def start_link(_opts) do
     Broadway.start_link(__MODULE__,
@@ -33,7 +34,7 @@ defmodule EcommerceSim.FraudDetectorService.ConsumerOne do
 
   @impl true
   def handle_message(_, message, _) do
-    Message.update_data(message, fn data -> {data, String.trim(data)} end)
+    Message.update_data(message, fn data -> {data, Serializer.decode(data)} end)
   end
 
   @impl true
