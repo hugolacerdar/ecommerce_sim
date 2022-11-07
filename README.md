@@ -1,6 +1,6 @@
 # EcommerceSim
 
-**TODO: Add description**
+A project I'm developing to exercise what I am currently learning about kafka.
 
 ## Installation
 
